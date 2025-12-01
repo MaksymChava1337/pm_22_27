@@ -11,20 +11,20 @@ const rename = require('gulp-rename');
 
 const paths = {
   styles: {
-    src: 'src/**/*.scss', 
+    src: 'src/app/scss/**/*.scss', 
     dest: 'dist/css/'
   },
   scripts: {
-    src: 'src/js/**/*.js',
+    src: 'src/app/js/**/*.js',
     dest: 'dist/js/'
   },
   images: {
-    src: 'src/imgs/**/*',
+    src: 'src/app/imgs/**/*',
     dest: 'dist/img/'
   },
   html: {
-    src: 'src/*.html',
-    watch: 'src/**/*.html', 
+    src: 'src/app/*.html',
+    watch: 'src/app/**/*.html', 
     dest: 'dist/'
   },
   bootstrap: {
