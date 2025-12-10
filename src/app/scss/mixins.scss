@@ -1,0 +1,27 @@
+// Міксін для заголовків
+
+@use 'variables' as *;
+
+
+@mixin section-title($color, $border-color) {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: $color;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid $border-color;
+  display: flex;
+  align-items: center;
+}
+
+// Міксін для точок таймлайну
+@mixin timeline-dot {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  border: 3px solid $primary-dark;
+  top: 5px;
+}

@@ -1,0 +1,26 @@
+@use 'variables' as *;
+
+// 2. Підключаємо Bootstrap (сучасний спосіб)
+// Якщо Gulp налаштований з includePaths: ['node_modules'], то так:
+@use '../../../node_modules/bootstrap/scss/bootstrap';
+
+
+// Тут ми просто кажемо "візьми CSS з цих файлів"
+@use '../components/content/content.scss';
+@use '../components/main-content/main-content.scss';
+
+// 3. Загальні стилі
+body {
+    font-family: $main-font; // Змінна доступна, бо підключили зверху
+    background-color: #eef1f5;
+    margin: 0;
+}
+
+.resume-container {
+    max-width: 1140px;
+    margin: 30px auto;
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+// 4. Підключаємо компонент

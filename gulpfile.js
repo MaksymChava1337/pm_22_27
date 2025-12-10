@@ -11,7 +11,7 @@ const rename = require('gulp-rename');
 
 const paths = {
   styles: {
-    src: 'src/app/scss/**/*.scss', 
+    src: 'src/app/scss/index.scss', 
     dest: 'dist/css/'
   },
   scripts: {
@@ -42,7 +42,9 @@ function clean(){
 
 function styles(){
     return src(paths.styles.src)
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({includePaths: ['node_modules'],
+      silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'mixed-decls']
+    }).on('error', sass.logError))
     .pipe(cleanCSS())
     .pipe(dest(paths.styles.dest))
     .pipe(browserSync.stream()) 
