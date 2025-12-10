@@ -1,131 +1,190 @@
 // --- Змінні ---
-$final-red: #D71E35;
-$final-dark: #373A3C;
-$final-light-gray: #f2f2f2; // Світло-сірий фон для контактів
+$c-red: #D71E35;
+$c-dark: #373A3C;
+$c-gray-bg: #f4f4f4;
+$c-white: #ffffff;
 
-// --- ОСНОВНА СТРУКТУРА ---
-.resume-card-final {
+// Скидання відступів сторінки (щоб не було білих смуг по краях)
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif; // Підстав свій шрифт
+    overflow-x: hidden;
+}
+
+// --- ГОЛОВНА ОБГОРТКА ---
+.resume-wrapper {
     display: flex;
     width: 100%;
-    
-    // Ключові зміни для повного екрану:
-    max-width: 100%;       // Прибираємо обмеження ширини
-    min-height: 100vh;     // Розтягуємо на всю висоту вікна браузера
-    margin: 0;             // Прибираємо зовнішні відступи
-    
-    background-color: #fff;
-    overflow-x: hidden;    // Приховуємо горизонтальну прокрутку
-    position: relative; 
+    min-height: 100vh; // Розтягуємо на весь екран по висоті
+    background-color: $c-white;
 
-    @media (max-width: 768px) {
+    // Мобільна версія
+    @media (max-width: 991px) {
         flex-direction: column;
-        min-height: auto; // На мобільному висота буде залежати від контенту
     }
 }
 
-// --- ЛІВИЙ САЙДБАР ---
-.resume-sidebar-final {
-    width: 35%; 
-    max-width: 400px;
-    background-color: $final-dark;
+// --- ЛІВА КОЛОНКА ---
+.left-sidebar {
+    width: 35%; // Фіксована ширина (можна змінити на 40%, якщо треба ширше)
     display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 2; // Піднімаємо на вищий шар, щоб фото не налазіло на текст імені
-
-    @media (max-width: 768px) {
+    flex-direction: column; // Блоки йдуть зверху вниз
+    
+    @media (max-width: 991px) {
         width: 100%;
         min-height: auto;
     }
 
-    .red-accent-top {
-        width: 100%; // На всю ширину лівого блоку
-        height: 140px;
-        background-color: $final-red;
-        // Хак: трохи вилазить вгору-вправо, як на макеті
-        clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
+    // 1. Червоний блок
+    .sidebar-red-block {
+        height: 400px; // Висота червоної частини. Змінюй це число, щоб підняти/опустити лінію стику
+        background-color: $c-red;
+        margin: 50px 0px 20px 0px;
+        width: 100%;
+        flex-shrink: 0; // Не стискається
     }
 
-    .photo-placeholder {
-        // Зарезервувати простір там, де буде фото
-        height: 180px; 
-    }
+    // 2. Темний блок
+    .sidebar-dark-block {
+        background-color: $c-dark;
+        color: $c-white;
+        flex-grow: 1; // Займає всю решту висоти до низу екрану
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end; // Притискаємо текст до низу
+        padding: 50px;
+        
+        .name-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
 
-    .role-text-final {
-        letter-spacing: 2px;
-        font-size: 0.9rem;
+        .role-text {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            opacity: 0.8;
+            margin: 0;
+        }
     }
 }
 
-// --- ПРАВИЙ КОНТЕНТ ---
-.resume-content-final {
+// --- ПРАВА КОЛОНКА ---
+.right-content {
     width: 65%;
-    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    position: relative; // Батьківський блок для фото
+
+    @media (max-width: 991px) {
+        width: 100%;
+    }
+
+    // 1. ФОТОГРАФІЯ
+    .floating-photo {
+        width: 220px;
+        height: 240px;
+        background: $c-white;
+        padding: 10px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        
+        position: absolute;
+        top: 140px; // Відступ зверху. Підбирай так, щоб фото перекривало лінію червоний/сірий
+        left: 0;    // Притиснути до лівого краю правої колонки
+        transform: translateX(-50%); // Змістити на 50% вліво (наїхати на сайдбар)
+        z-index: 10;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 991px) {
+            position: relative;
+            transform: none;
+            left: auto;
+            top: auto;
+            margin: -50px auto 30px auto; // Витягуємо вгору на мобільному
+        }
+    }
+
+    // 2. Верхня біла секція (About)
+    .content-section-top {
+        background-color: $c-white;
+        padding: 80px 50px 50px 160px; // padding-left 160px відштовхує текст від фото
+        flex-grow: 1; // Розтягується
+
+        @media (max-width: 991px) { padding: 40px; }
+    }
+
+    // 3. Нижня сіра секція (Contact)
+    .content-section-bottom {
+        background-color: $c-gray-bg;
+        padding: 60px 50px 60px 160px; // Такий самий відступ зліва
+        
+        @media (max-width: 991px) { padding: 40px; }
+    }
+}
+
+// --- СТИЛІЗАЦІЯ КОНТЕНТУ ---
+.header-with-icon {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    
+    h2 {
+        margin: 0 0 0 15px;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: $c-dark;
+        font-size: 1.8rem;
+    }
+    
+    .icon-red { font-size: 2rem; color: $c-red; line-height: 1; }
+    .icon-dark { font-size: 2rem; color: $c-dark; line-height: 1; }
+}
+
+.red-border-box {
+    border: 1px solid $c-red;
+    padding: 30px;
+    color: #555;
+    line-height: 1.6;
     position: relative;
-
-    @media (max-width: 768px) {
-        width: 100%;
-    }
-}
-
-// --- ФОТОГРАФІЯ (НАКЛАДАННЯ) ---
-.profile-photo-final {
-    width: 200px;  
-    height: 220px; 
-    background: #fff; 
-    padding: 10px; // Біла рамка
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); // Тінь
-
-    // Абсолютне позиціонування
-    position: absolute;
-    top: 50px; // Відступ зверху
-    left: 0;   // Притискаємо до лівого краю ПРАВОЇ колонки
-    transform: translateX(-50%); // Центруємо на стику
-    z-index: 5; // Поверх інших елементів
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
     
-    @media (max-width: 768px) {
-        // Прибираємо накладання на мобільному
-        position: relative;
-        transform: none;
-        margin: -100px auto 20px auto; // Витягуємо наверх
-        left: auto;
-        top: auto;
+    // Лінія зліва від бокса (декор)
+    &::before {
+        content: '';
+        position: absolute;
+        left: -1px;
+        top: -20px;
+        height: 20px;
+        width: 1px;
+        background: $c-red; // Тонка лінія вгору
     }
 }
 
-// --- СЕКЦІЇ ---
-.top-content-area {
-    // Встановлюємо мінімальну висоту, щоб вмістити текст ABOUT ME та фото
-    min-height: 350px; 
-    position: relative; 
-}
-
-.about-section-final {
-    // Жорсткий відступ зліва, щоб обійти фото
-    padding-left: 100px; 
-
-    @media (max-width: 768px) {
-        padding-left: 0;
-    }
-}
-
-.contact-section-final {
-    background-color: $final-light-gray;
-    padding-left: 100px; // Вирівнюємо контакти з текстом
+.contact-grid {
+    display: flex;
+    gap: 40px;
     
-    @media (max-width: 768px) {
-        padding-left: 20px;
-    }
-}
-
-.section-header-final {
-    .icon-dark-final, .icon-red-final {
-        font-size: 1.5rem;
+    @media (max-width: 768px) { flex-direction: column; gap: 20px; }
+    
+    .c-item {
+        margin-bottom: 15px;
+        color: #555;
+        font-size: 1rem;
+        display: flex;
+        align-items: flex-start;
+        
+        .bullet {
+            color: $c-dark;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
     }
 }
