@@ -12,6 +12,7 @@ const rename = require('gulp-rename');
 const paths = {
   styles: {
     src: 'src/app/scss/index.scss', 
+    watch: 'src/app/**/*.scss',
     dest: 'dist/css/'
   },
   scripts: {
@@ -95,7 +96,7 @@ function watchTask(){
         notify: false
     });
 
-  watch(paths.styles.src, styles);
+  watch(paths.styles.watch, styles);
   watch(paths.scripts.src, series(scripts, reload));
   watch(paths.images.src, series(images, reload));
   watch(paths.html.watch, series(html, reload));

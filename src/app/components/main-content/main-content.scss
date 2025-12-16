@@ -2,3 +2,59 @@
 @use '../scss/variables' as *;
 @use '../scss/mixins' as *;
 
+
+.main-content{
+    background-image:url(/dist/img/page.jpg);
+}
+
+.section{
+    display: flex;
+}
+.line{
+    display: flex;
+}
+
+.skills-text-dot{
+    display: flex;
+}
+
+.skills-progress-bar{
+    width: 200px;
+    background-color: $text-light-grey;
+    height: 10px;
+    border-radius: 50px;
+
+    div{
+        width: 100px;
+        height: 10px;
+        background-color: $primary-red;
+        border-radius: 50px;
+    }
+}
+
+.first-column{
+    display: flex;
+    flex-direction: column;
+    width: 25px;
+    height: 450px;
+    background-color: $primary-dark;
+    border-radius: 50px;
+
+    span{
+        color: $bg-white;
+    }
+}
+
+
+.refernces-text-dot{
+    display: flex;
+}
+
+
+.points{
+    display: flex;
+}
+
+.text-dot{
+    display: flex;
+}
