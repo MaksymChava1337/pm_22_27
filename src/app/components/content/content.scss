@@ -1,14 +1,14 @@
-// --- Змінні ---
 $c-red: #D71E35;
 $c-dark: #373A3C;
-$c-gray-bg: #f4f4f4;
+$c-gray: #f8f9fa;
 $c-white: #ffffff;
+$c-line: #333333; // Колір розділової лінії
 
-// Скидання відступів сторінки (щоб не було білих смуг по краях)
+// 3. Базові налаштування
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif; // Підстав свій шрифт
+    font-family: 'Arial', sans-serif; // Або твій шрифт
     overflow-x: hidden;
 }
 
@@ -16,59 +16,40 @@ body {
 .resume-wrapper {
     display: flex;
     width: 100%;
-    min-height: 100vh; // Розтягуємо на весь екран по висоті
+    min-height: 100vh;
     background-color: $c-white;
 
-    // Мобільна версія
     @media (max-width: 991px) {
         flex-direction: column;
     }
 }
 
-// --- ЛІВА КОЛОНКА ---
+// --- ЛІВА КОЛОНКА (САЙДБАР) - БЕЗ ЗМІН ---
 .left-sidebar {
-    width: 35%; // Фіксована ширина (можна змінити на 40%, якщо треба ширше)
+    width: 40%; // Твоя ширина
+    min-width: 40%;
     display: flex;
-    flex-direction: column; // Блоки йдуть зверху вниз
+    flex-direction: column;
     
-    @media (max-width: 991px) {
-        width: 100%;
-        min-height: auto;
-    }
+    @media (max-width: 991px) { width: 100%; min-height: auto; }
 
-    // 1. Червоний блок
-    .sidebar-red-block {
-        height: 400px; // Висота червоної частини. Змінюй це число, щоб підняти/опустити лінію стику
+    .sidebar-red-part {
+        height: 450px;
         background-color: $c-red;
-        margin: 50px 0px 20px 0px;
         width: 100%;
-        flex-shrink: 0; // Не стискається
+        margin: 50px 0px 25px 0px;
     }
 
-    // 2. Темний блок
-    .sidebar-dark-block {
+    .sidebar-dark-part {
         background-color: $c-dark;
-        color: $c-white;
-        flex-grow: 1; // Займає всю решту висоти до низу екрану
+        flex-grow: 1;
+        padding: 30px 20px 50px 190px;
+        color: white;
         display: flex;
-        flex-direction: column;
-        justify-content: flex-end; // Притискаємо текст до низу
-        padding: 50px;
-        
-        .name-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
+        align-items: flex-end;
 
-        .role-text {
-            font-size: 1rem;
-            letter-spacing: 3px;
-            opacity: 0.8;
-            margin: 0;
-        }
+        .name { font-weight: 800; font-size: 3.5rem; line-height: 1; margin-bottom: 10px; }
+        .role { letter-spacing: 2px; opacity: 0.8; margin: 0; }
     }
 }
 
@@ -77,114 +58,152 @@ body {
     width: 65%;
     display: flex;
     flex-direction: column;
-    position: relative; // Батьківський блок для фото
+    background-color: $c-white;
+
+    @media (max-width: 991px) { width: 100%; }
+}
+
+// ==========================================
+// НОВИЙ БЛОК ABOUT ME (Виправлений)
+// ==========================================
+.about-card-wrapper {
+    // Відступи від країв екрану, щоб блок не прилипа
+    background-color: $c-white;
+    position: absolute;
+    left: 190px;
+    top: 130px;
+    width: 80%;
+    border: 15px solid $c-white;
+    border-radius: 10px;
+
+    @media (max-width: 768px) { padding: 20px; }
+}
+
+.about-card-inner {
+    display: flex;
+    align-items: stretch; 
+    
+    background: $c-white;
+    
 
     @media (max-width: 991px) {
-        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
     }
 
     // 1. ФОТОГРАФІЯ
-    .floating-photo {
-        width: 220px;
-        height: 240px;
-        background: $c-white;
-        padding: 10px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    .about-photo {
+        // Фіксована ширина ~260px. Це нормально для макету, не гігантська.
+        flex: 0 0 400px; 
+        margin-right: 0; 
         
-        position: absolute;
-        top: 140px; // Відступ зверху. Підбирай так, щоб фото перекривало лінію червоний/сірий
-        left: 0;    // Притиснути до лівого краю правої колонки
-        transform: translateX(-50%); // Змістити на 50% вліво (наїхати на сайдбар)
-        z-index: 10;
-
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; // Заповнює блок, не деформується
+            display: block;
         }
 
         @media (max-width: 991px) {
-            position: relative;
-            transform: none;
-            left: auto;
-            top: auto;
-            margin: -50px auto 30px auto; // Витягуємо вгору на мобільному
+            flex: none;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
         }
     }
 
-    // 2. Верхня біла секція (About)
-    .content-section-top {
-        background-color: $c-white;
-        padding: 80px 50px 50px 160px; // padding-left 160px відштовхує текст від фото
-        flex-grow: 1; // Розтягується
-
-        @media (max-width: 991px) { padding: 40px; }
-    }
-
-    // 3. Нижня сіра секція (Contact)
-    .content-section-bottom {
-        background-color: $c-gray-bg;
-        padding: 60px 50px 60px 160px; // Такий самий відступ зліва
+    // 2. ВЕРТИКАЛЬНА ЛІНІЯ
+    .about-separator {
+        width: 3px; // Товщина лінії
+        background-color: $c-dark; // Темно-сірий колір
+        margin: 25px 30px 25px 30px; // Відступи зліва і справа від лінії
+        flex-shrink: 0;
         
-        @media (max-width: 991px) { padding: 40px; }
+        @media (max-width: 991px) {
+            width: 100%; height: 1px; margin: 20px 0; // На мобільному - горизонтальна
+        }
     }
-}
 
-// --- СТИЛІЗАЦІЯ КОНТЕНТУ ---
-.header-with-icon {
-    display: flex;
-    align-items: center;
-    margin-bottom: 25px;
-    
-    h2 {
-        margin: 0 0 0 15px;
-        font-weight: 800;
-        text-transform: uppercase;
+    .name{
+         // Займає все вільне місце справа
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .icon{
+        width: 50px;
+        margin-right: 15px;
+    }
+
+    .about-me-text{
         color: $c-dark;
         font-size: 1.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-top: 5px;
     }
-    
-    .icon-red { font-size: 2rem; color: $c-red; line-height: 1; }
-    .icon-dark { font-size: 2rem; color: $c-dark; line-height: 1; }
-}
 
-.red-border-box {
-    border: 1px solid $c-red;
-    padding: 30px;
-    color: #555;
-    line-height: 1.6;
-    position: relative;
-    
-    // Лінія зліва від бокса (декор)
-    &::before {
-        content: '';
-        position: absolute;
-        left: -1px;
-        top: -20px;
-        height: 20px;
-        width: 1px;
-        background: $c-red; // Тонка лінія вгору
-    }
-}
-
-.contact-grid {
-    display: flex;
-    gap: 40px;
-    
-    @media (max-width: 768px) { flex-direction: column; gap: 20px; }
-    
-    .c-item {
-        margin-bottom: 15px;
-        color: #555;
-        font-size: 1rem;
+    // 3. ТЕКСТ
+    .about-text {
+        margin-left: 15px;
+        flex-grow: 1; // Займає все вільне місце справа
         display: flex;
-        align-items: flex-start;
-        
-        .bullet {
-            color: $c-dark;
-            margin-right: 10px;
-            font-size: 1.2rem;
-            line-height: 1;
+        justify-content: center; 
+        border-top: 3px solid $c-red;
+        border-bottom: 3px solid $c-red;
+        border-right: 3px solid $c-red;
+        padding-right: 30px;// Центруємо вертикально відносно фото
+       
+        .header-wrap {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            
         }
+
+        .description-wrap {
+            color: #555;
+            line-height: 1.5;
+            font-size: 20px;
+            text-align: justify;
+        }
+        
+        @media (max-width: 991px) { text-align: center; }
+    }
+}
+
+.phone{
+    width: 50px;
+}
+
+// --- БЛОК КОНТАКТІВ (Твій код) ---
+.contact-section {
+    background-color: $c-gray;
+    flex-grow: 1; // Тягнеться до низу
+    padding: 0px 0px 30px 100px; // Відступи
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+
+    @media (max-width: 991px) { padding: 40px; }
+    
+    .contact-list {
+        display: flex;
+
+        .col { display: flex; flex-direction: column; gap: 15px; }
+        .item { display: flex; align-items: center; gap: 10px; color: #555; font-weight: 500;}
+        .sq { font-size: 0.8rem; color: $c-dark; }
+    }
+
+    .header-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        margin-left: 150px;
+        h2 { margin: 0 0 0 15px; font-weight: 800; font-size: 1.8rem; color: $c-dark; text-transform: uppercase; }
+        .icon-dark { font-size: 2rem; color: $c-dark; }
     }
 }
