@@ -3,25 +3,16 @@
 @use 'variables' as *;
 
 
-@mixin section-title($color, $border-color) {
-  font-size: 1.5rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: $color;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid $border-color;
-  display: flex;
-  align-items: center;
+@mixin my-title($bg-color){
+  font-weight: 900;
+  font-family: 'Arial', sans-serif;
+  color: $bg-color;
 }
 
-// Міксін для точок таймлайну
-@mixin timeline-dot {
-  content: '';
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background-color: #fff;
-  border: 3px solid $primary-dark;
-  top: 5px;
+@mixin my-points($text-align){
+  color: #D71E35;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  text-align: $text-align;
+  font-size: 25px;
 }

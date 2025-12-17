@@ -19,9 +19,7 @@ body {
     min-height: 100vh;
     background-color: $c-white;
 
-    @media (max-width: 991px) {
-        flex-direction: column;
-    }
+
 }
 
 // --- ЛІВА КОЛОНКА (САЙДБАР) - БЕЗ ЗМІН ---
@@ -31,7 +29,7 @@ body {
     display: flex;
     flex-direction: column;
     
-    @media (max-width: 991px) { width: 100%; min-height: auto; }
+    
 
     .sidebar-red-part {
         height: 450px;
@@ -60,7 +58,6 @@ body {
     flex-direction: column;
     background-color: $c-white;
 
-    @media (max-width: 991px) { width: 100%; }
 }
 
 // ==========================================
@@ -76,7 +73,6 @@ body {
     border: 15px solid $c-white;
     border-radius: 10px;
 
-    @media (max-width: 768px) { padding: 20px; }
 }
 
 .about-card-inner {
@@ -85,11 +81,6 @@ body {
     
     background: $c-white;
     
-
-    @media (max-width: 991px) {
-        flex-direction: column;
-        align-items: center;
-        padding: 15px;
     }
 
     // 1. ФОТОГРАФІЯ
@@ -104,13 +95,6 @@ body {
             object-fit: cover; // Заповнює блок, не деформується
             display: block;
         }
-
-        @media (max-width: 991px) {
-            flex: none;
-            width: 200px;
-            height: 200px;
-            margin-bottom: 20px;
-        }
     }
 
     // 2. ВЕРТИКАЛЬНА ЛІНІЯ
@@ -120,9 +104,7 @@ body {
         margin: 25px 30px 25px 30px; // Відступи зліва і справа від лінії
         flex-shrink: 0;
         
-        @media (max-width: 991px) {
-            width: 100%; height: 1px; margin: 20px 0; // На мобільному - горизонтальна
-        }
+        
     }
 
     .name{
@@ -171,9 +153,9 @@ body {
             text-align: justify;
         }
         
-        @media (max-width: 991px) { text-align: center; }
+       
     }
-}
+
 
 .phone{
     width: 50px;
