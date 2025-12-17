@@ -1,299 +1,332 @@
-
 @use '../scss/variables' as *;
 @use '../scss/mixins' as *;
 
-
-.main-content{
-    background-image:url(dist/img/page.jpg);
+// --- ШАБЛОНИ (EXTENDS) ---
+%dot-base {
+  width: 13px;
+  height: 13px;
+  border-radius: 50px;
+  background-color: $primary-dark;
 }
 
-.section{
-    display: flex;
-    align-items: center;
-}
-.line{
-    display: flex;
-}
+// Шаблон для чорної смужки (Timeline)
+%timeline-bar {
+  display: flex;
+  flex-direction: column;
+  width: 25px;
+  height: 450px;
+  background-color: $primary-dark;
+  border-radius: 50px;
+  align-items: center;
+  padding-top: $base-unit; // 10px
 
-.skills-text-dot{
-    display: flex;
-}
-
-.skills-progress-bar{
-    width: 150px;
-    background-color: $text-light-grey;
-    height: 6px;
-    display: flex;
-    align-items: center;
-    border-radius: 50px;
-    margin-top: 20px;
-    margin-left: 40px;
-
-    div{
-        width: 100px;
-        height: 5px;
-        background-color: $primary-red;
-        border-radius: 50px;
-    }
+  span {
+    color: $bg-white;
+    margin-bottom: 140px;
+  }
 }
 
-.first-column{
-    display: flex;
-    flex-direction: column;
-    width: 25px;
-    height: 450px;
-    background-color: $primary-dark;
-    border-radius: 50px;
-
-    span{
-        color: $bg-white;
-    }
+// НОВИЙ ШАБЛОН: Стиль для дати (щоб був жирним всюди)
+%date-style {
+  font-weight: 800;
+  font-size: 12px;
+  color: $primary-dark;
 }
 
+// --- ОСНОВНІ СТИЛІ ---
 
-.refernces-text-dot{
-    display: flex;
+.main-content {
+  background-image: url(../img/page.jpg);
+  background-size: cover;
 }
 
-
-.points{
-    display: flex;
+.section {
+  display: flex;
+  align-items: center;
 }
 
-.text-dot{
-    display: flex;
+.line {
+  display: flex;
+  justify-content: space-between;
 }
 
-.job-experience-title{
+// === JOB EXPERIENCE SECTION ===
+.job-experience {
+  
+  .job-experience-title {
     @include my-title($primary-red);
     border-bottom: 3px solid #555;
-    padding-right: 50px;
-    padding-bottom: 10px;
+    padding-right: $base-unit * 5; 
+    padding-bottom: $base-unit; 
+  }
+
+  .item2 {
+    width: 50px;
+    margin-right: $base-unit * 3;
+  }
+
+  .flex {
+    display: flex;
+    align-items: flex-start;
+
+    .first-column {
+      @extend %timeline-bar;
+      margin-right: $base-unit * 3; 
+    }
+
+    .second-column {
+      .text-block1 {
+        margin-top: $base-unit;
+        margin-bottom: 55px;
+      }
+      .text-block3 {
+        margin-top: 55px;
+      }
+      .block-h1 {
+        @include my-points(start);
+        margin: 0;
+      }
+      .text-name {
+        font-weight: 600;
+        font-size: 14px;
+        color: $primary-dark;
+      }
+      
+      // Тут підключаємо жирний шрифт для дат
+      .text-date {
+        @extend %date-style;
+      }
+      
+      .text-lorem {
+        width: $base-unit * 30;
+        color: $text-grey;
+        font-size: 16px;
+        margin-top: $base-unit;
+      }
+    }
+  }
+}
+
+// === SKILLS SECTION ===
+.skills {
+  margin-top: 100px;
+  margin-bottom: 70px;
+
+  .skills-title {
+    @include my-title($primary-red);
+  }
+
+  .section0 {
+    margin-left: $base-unit * 2;
+
+    .skills-block {
+      margin-top: 40px;
+
+      .skills-text-dot {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        color: $primary-dark;
+
+        .dot {
+          @extend %dot-base; 
+          margin-right: $base-unit * 3; 
+        }
+      }
+
+      .skills-progress-bar {
+        width: 150px;
+        background-color: $text-light-grey;
+        height: 6px;
+        display: flex;
+        align-items: center;
+        border-radius: 50px;
+        margin-top: $base-unit * 2;
+        margin-left: 40px;
+
+        div {
+          width: 100px;
+          height: 5px;
+          background-color: $primary-red;
+          border-radius: 50px;
+        }
+      }
+    }
+  }
+}
+
+// === REFERENCES SECTION ===
+.references {
+  .section1 {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .references-text {
+    @include my-title($primary-dark);
+    text-align: end;
+    margin-right: 40px;
+  }
+
+  .refernces-text-dot {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: $base-unit * 2; 
+    align-items: center;
+
+    .references-txt {
+      text-align: end;
+      font-weight: 700;
+      color: $primary-red;
+    }
+
+    .dot1 {
+      @extend %dot-base;
+      margin-left: $base-unit * 3; 
+    }
+  }
+
+  .sub-text {
+    text-align: end;
+    color: $text-grey;
+    margin-right: 40px;
+  }
+}
+
+// === EDUCATION SECTION ===
+.education {
+  margin-top: 120px;
+
+  .sectionL {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .job-experience-ll {
+      @include my-title($primary-red);
+      border-bottom: 3px solid #555;
+      padding-left: 50px;
+      padding-bottom: $base-unit;
+    }
+
+    .item1 {
+      width: 50px;
+      height: 50px;
+      margin-left: $base-unit * 3;
+    }
+    
+    .first-column {
+        @extend %timeline-bar; 
+    }
+  }
+
+  .second-column {
+    margin-right: $base-unit * 3; 
+
+    .emm {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .block-h2 {
+      @include my-points(start);
+      margin: 0;
+      text-align: end;
+    }
+
+    // ОСЬ ТУТ БУЛО ПРОПУЩЕНО, ТЕПЕР ДОДАНО:
+    .text-date {
+        @extend %date-style; // Робить дату жирною
+    }
+
+    .text-name {
+        // Додав і це про всяк випадок, бо в тебе там теж University Name
+        font-weight: 600;
+        font-size: 14px;
+        color: $primary-dark;
+    }
+
+    .mm {
+      margin-right: 110px;
+    }
+    
+    .text-lorem2 {
+      width: 300px;
+      color: $text-grey;
+      font-size: 16px;
+      margin-top: $base-unit;
+      text-align: end;
+    }
+  }
+}
+
+// === HOBBIES SECTION ===
+.hobbies {
+  margin-top: 60px;
+
+  .hobbies-text {
+    @include my-title($primary-red);
+    text-align: end;
+  }
+
+  .points {
+    display: flex;
+    justify-content: flex-end;
+    
+    .text-dot {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+
+      p {
+        margin-left: $base-unit * 2; 
+        font-size: 15px;
+        color: $text-grey;
+      }
+      span {
+        margin-left: $base-unit; 
+        color: $primary-red;
+      }
+    }
+  }
+
+  > .col-12 > .text-dot {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+
+      p {
+        margin-left: $base-unit * 2;
+        font-size: 15px;
+        color: $text-grey;
+      }
+      span {
+        margin-left: $base-unit;
+        color: $primary-red;
+      }
+  }
+}
+
+.first-column2{
+      display: flex;
+      flex-direction: column;
+      
+      width: 25px;
+      height: 450px;
+      background-color: $primary-dark;
+      border-radius: 50px;
+      align-items: center;
+      padding-top: $base-unit; // 10px
+      margin-right: $base-unit * 3;
+
+      span {
+        color: $bg-white;
+        margin-bottom: 140px;
+      }
 }
 
 .item2{
     width: 50px;
-    margin-right: 30px;
-}
-
-.item1{
-    width: 50px;
-    height: 50px;
-    margin-left: 30px;
-}
-
-
-.block-h1{
-        @include my-points(start);
-        margin: 0;
-    }
-
-
-.flex{
-    display: flex;
-    align-items: flex-start;
-}
-
-.first-column{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 10px;
-    margin-right: 30px;
-
-    span{
-        margin-bottom: 140px;
-    }
-}
-
-.second-column{
-
-    .text-block1{
-        margin-top: 10px;
-        margin-bottom: 55px;
-    }
-
-    .text-block3{
-        margin-top: 55px;
-    }
-
-}
-
-.text-lorem{
-    width:300px;
-    color: $text-grey;
-    font-size: 16px;
-    margin-top: 10px;
-}
-
-.text-name{
-    font-weight: 600;
-    font-size: 14px;
-    color: $primary-dark;
-}
-
-.line{
-    display: flex;
-    justify-content: space-between;
-}
-
-.text-date{
-    font-weight: 800;
-    font-size: 12px;
-    color: $primary-dark;
-}
-
-.skills{
-    margin-top: 100px;
-    margin-bottom: 70px;
-}
-
-.skills-title {
-    @include my-title($primary-red);
-}
-
-.skills-block{
-    margin-top: 40px;
-}
-
-.dot{
-        width: 13px;
-        height: 13px;
-        border-radius: 50px;
-        background-color: $primary-dark;
-        margin-right: 30px;
-    }
-
-
-    .dot1{
-        width: 13px;
-        height: 13px;
-        border-radius: 50px;
-        background-color: $primary-dark;
-        margin-left: 30px;
-    }
-
-
-.skills-text-dot{
-    display: flex;
-    align-items: center;
-    font-weight: 700;
-    color: $primary-dark;
-}
-
-
-.section0{
-    margin-left: 20px;
-}
-
-.references-text{
-    @include my-title($primary-dark);
-    text-align: end;
-    margin-right: 40px;
-}
-
-.section1{
-    display: flex;
-    justify-content: flex-end;
-
-   
-}
-
-.references-txt{
-    text-align: end;
-    font-weight: 700;
-    color: $primary-red;
-}
-
-.refernces-text-dot{
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-    align-items: center;
-}
-
-.sub-text{
-    text-align: end;
-    color: $text-grey;
-    margin-right: 40px;
-}
-
-.job-experience-ll{
-    @include my-title($primary-red);
-    border-bottom: 3px solid #555;
-    padding-left: 50px;
-    padding-bottom: 10px;
-}
-
-.sectionL{
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.item1{
-    width: 50px;
-}
-
-.block-h2{
-     @include my-points(start);
-        margin: 0;
-        text-align: end;
-}
-
-.text-lorem2{
-    width:300px;
-    color: $text-grey;
-    font-size: 16px;
-    margin-top: 10px;
-    text-align: end;
-}
-
-.emm{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-.mm{
-    margin-right: 110px;
-}
-
-.second-column{
-    margin-right: 30px;
-}
-
-.education{
-    margin-top: 120px;
-}
-
-.hobbies-text{
-    @include my-title($primary-red);
-    text-align: end;
-}
-
-.text-dot{
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-
-    p{
-        margin-left: 20px;
-        font-size: 15px;
-        color: $text-grey;
-    }
-
-    span{
-        margin-left: 10px;
-        color: $primary-red;
-    }
-}
-
-.points{
-     display: flex;
-    justify-content: flex-end;
-}
-
-.hobbies{
-    margin-top: 60px;
+    margin-right: 20px;
 }
