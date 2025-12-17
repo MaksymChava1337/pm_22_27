@@ -2,17 +2,17 @@ $c-red: #D71E35;
 $c-dark: #373A3C;
 $c-gray: #f8f9fa;
 $c-white: #ffffff;
-$c-line: #333333; // Колір розділової лінії
+$c-line: #333333; 
 
-// 3. Базові налаштування
+
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif; // Або твій шрифт
+    font-family: 'Arial', sans-serif; 
     overflow-x: hidden;
 }
 
-// --- ГОЛОВНА ОБГОРТКА ---
+
 .resume-wrapper {
     display: flex;
     width: 100%;
@@ -22,9 +22,9 @@ body {
 
 }
 
-// --- ЛІВА КОЛОНКА (САЙДБАР) - БЕЗ ЗМІН ---
+
 .left-sidebar {
-    width: 40%; // Твоя ширина
+    width: 40%; 
     min-width: 40%;
     display: flex;
     flex-direction: column;
@@ -51,7 +51,7 @@ body {
     }
 }
 
-// --- ПРАВА КОЛОНКА ---
+
 .right-content {
     width: 65%;
     display: flex;
@@ -60,11 +60,9 @@ body {
 
 }
 
-// ==========================================
-// НОВИЙ БЛОК ABOUT ME (Виправлений)
-// ==========================================
+
 .about-card-wrapper {
-    // Відступи від країв екрану, щоб блок не прилипа
+    
     background-color: $c-white;
     position: absolute;
     left: 190px;
@@ -83,36 +81,37 @@ body {
     
     }
 
-    // 1. ФОТОГРАФІЯ
+
     .about-photo {
-        // Фіксована ширина ~260px. Це нормально для макету, не гігантська.
+      
         flex: 0 0 400px; 
         margin-right: 0; 
         
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover; // Заповнює блок, не деформується
+            object-fit: cover; 
             display: block;
         }
     }
 
-    // 2. ВЕРТИКАЛЬНА ЛІНІЯ
+    
     .about-separator {
-        width: 3px; // Товщина лінії
-        background-color: $c-dark; // Темно-сірий колір
-        margin: 25px 30px 25px 30px; // Відступи зліва і справа від лінії
+        width: 3px; 
+        background-color: $c-dark; 
+        margin: 25px 30px 25px 30px; 
         flex-shrink: 0;
         
         
     }
 
     .name{
-         // Займає все вільне місце справа
+        
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        
     }
 
     .icon{
@@ -131,13 +130,13 @@ body {
     // 3. ТЕКСТ
     .about-text {
         margin-left: 15px;
-        flex-grow: 1; // Займає все вільне місце справа
+        flex-grow: 1; 
         display: flex;
         justify-content: center; 
         border-top: 3px solid $c-red;
         border-bottom: 3px solid $c-red;
         border-right: 3px solid $c-red;
-        padding-right: 30px;// Центруємо вертикально відносно фото
+        padding-right: 30px;
        
         .header-wrap {
             display: flex;
@@ -161,11 +160,11 @@ body {
     width: 50px;
 }
 
-// --- БЛОК КОНТАКТІВ (Твій код) ---
+
 .contact-section {
     background-color: $c-gray;
-    flex-grow: 1; // Тягнеться до низу
-    padding: 0px 0px 30px 100px; // Відступи
+    flex-grow: 1;
+    padding: 0px 0px 30px 100px; 
     display: flex;
     justify-content: flex-end;
     flex-direction: column;

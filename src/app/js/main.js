@@ -1,74 +1,58 @@
 
-function setUserName() {
-    const fullName = "JOHN PARKER"; 
+document.addEventListener('DOMContentLoaded', function() {
 
-    const nameElement = document.getElementById('personName');
-
-    if (nameElement) {
-        nameElement.textContent = fullName;
-    } else {
-        console.error("Елемент з таким ID не знайдено!");
+    
+    function loadData() {
+    
+        fetch('json/data.json')
+            .then(response => {
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                return response.json();
+            })
+            .then(data => {
+               
+                setPersonalData(data.personalData);
+                renderSkills(data.skills);
+            })
+            .catch(error => {
+               
+                console.error('Помилка завантаження даних:', error);
+                
+                
+                const skillsContainer = document.getElementById('skillsContainer');
+                if (skillsContainer) {
+                    skillsContainer.innerHTML = '<p style="color: red; text-align: center;">Не вдалося завантажити дані.</p>';
+                }
+                alert('Вибачте, сталася помилка при завантаженні даних з серверу.');
+            });
     }
-}
 
-document.addEventListener('DOMContentLoaded', setUserName);
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    
-    const arrows = document.querySelectorAll('.arrow-btn');
-
-    arrows.forEach(arrow => {
-        arrow.addEventListener('click', function() {
-            
-            this.classList.toggle('active');
-
-            const headerContainer = this.closest('.section') || this.closest('.sectionL') || this.closest('.section1');
-            
-            const contentBlock = headerContainer.nextElementSibling;
-
-            if (contentBlock && contentBlock.classList.contains('toggle-content')) {
-                contentBlock.classList.toggle('hidden');
-            }
-        });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-
-    const skillsData = [
-        { 
-            name: "Microsoft Word", 
-            percent: 10  
-        },
-        { 
-            name: "Adobe Illustrator", 
-            percent: 75 
-        },
-        { 
-            name: "Microsoft Powerpoint", 
-            percent: 85 
-        },
-        { 
-            name: "Adobe Photoshop", 
-            percent: 60 
-        }
-    ];
-
-    
-    function renderSkills() {
+   
+    function setPersonalData(data) {
        
+        const nameElement = document.getElementById('personName');
+
+        if (nameElement && data.firstName && data.lastName) {
+            nameElement.textContent = `${data.firstName} ${data.lastName}`;
+        }
+    }
+
+   
+    function renderSkills(skillsArray) {
+        
         const container = document.getElementById('skillsContainer');
 
-        if (!container) {
-            console.error('Контейнер #skillsContainer не знайдено!');
-            return;
-        }
+        if (!container) return;
 
+        
         container.innerHTML = '';
 
-        skillsData.forEach(skill => {
-            
+       
+        skillsArray.forEach(skill => {
             const htmlMarkup = `
                 <div class="skills-block">
                     <div class="skills-text-dot">
@@ -80,11 +64,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             `;
-
             container.insertAdjacentHTML('beforeend', htmlMarkup);
         });
     }
 
-    renderSkills();
+    
+    function initAccordion() {
+        const arrows = document.querySelectorAll('.arrow-btn');
+        arrows.forEach(arrow => {
+            arrow.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const headerContainer = this.closest('.section') || this.closest('.sectionL') || this.closest('.section1');
+                const contentBlock = headerContainer.nextElementSibling;
+                if (contentBlock && contentBlock.classList.contains('toggle-content')) {
+                    contentBlock.classList.toggle('hidden');
+                }
+            });
+        });
+    }
+
+    loadData();    
+    initAccordion();
 
 });

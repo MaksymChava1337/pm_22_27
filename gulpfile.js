@@ -28,6 +28,10 @@ const paths = {
     watch: 'src/app/**/*.html', 
     dest: 'dist/'
   },
+  json: {
+    src: 'src/app/**/*.json', 
+    dest: 'dist/'             
+  },
   bootstrap: {
     css: 'node_modules/bootstrap/dist/css/bootstrap.min.css',
     js: [
@@ -73,6 +77,12 @@ function html(){
     .pipe(dest(paths.html.dest))
 }
 
+function jsonTask() {
+    return src(paths.json.src)
+        .pipe(dest(paths.json.dest));
+}
+
+
 function copyBootstrapCSS() {
   return src(paths.bootstrap.css)
     .pipe(dest(paths.styles.dest)); 
@@ -100,9 +110,10 @@ function watchTask(){
   watch(paths.scripts.src, series(scripts, reload));
   watch(paths.images.src, series(images, reload));
   watch(paths.html.watch, series(html, reload));
+  watch(paths.json.src, series(jsonTask, reload));
 }
 
 const copyBootstrap = parallel(copyBootstrapCSS, copyBootstrapJS);
 
-exports.build = series(clean, parallel(styles, scripts, images, html, copyBootstrap));
+exports.build = series(clean, parallel(styles, scripts, images, html, jsonTask, copyBootstrap));
 exports.default = series(exports.build, watchTask);

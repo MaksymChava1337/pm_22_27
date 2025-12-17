@@ -1,0 +1,25 @@
+{
+  "personalData": {
+    "firstName": "Maksym",
+    "lastName": "Chava",
+    "position": "Web Designer"
+  },
+  "skills": [
+    {
+      "name": "Microsoft Word",
+      "percent": 90
+    },
+    {
+      "name": "Adobe Illustrator",
+      "percent": 75
+    },
+    {
+      "name": "Microsoft Powerpoint",
+      "percent": 85
+    },
+    {
+      "name": "Adobe Photoshop",
+      "percent": 60
+    }
+  ]
+}
