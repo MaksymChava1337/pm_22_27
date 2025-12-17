@@ -1,7 +1,7 @@
 @use '../scss/variables' as *;
 @use '../scss/mixins' as *;
 
-// --- ШАБЛОНИ (EXTENDS) ---
+
 %dot-base {
   width: 13px;
   height: 13px;
@@ -9,7 +9,7 @@
   background-color: $primary-dark;
 }
 
-// Шаблон для чорної смужки (Timeline)
+
 %timeline-bar {
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@
   background-color: $primary-dark;
   border-radius: 50px;
   align-items: center;
-  padding-top: $base-unit; // 10px
+  padding-top: $base-unit; 
 
   span {
     color: $bg-white;
@@ -26,14 +26,14 @@
   }
 }
 
-// НОВИЙ ШАБЛОН: Стиль для дати (щоб був жирним всюди)
+
 %date-style {
   font-weight: 800;
   font-size: 12px;
   color: $primary-dark;
 }
 
-// --- ОСНОВНІ СТИЛІ ---
+
 
 .main-content {
   background-image: url(../img/page.jpg);
@@ -50,7 +50,7 @@
   justify-content: space-between;
 }
 
-// === JOB EXPERIENCE SECTION ===
+
 .job-experience {
   
   .job-experience-title {
@@ -92,7 +92,7 @@
         color: $primary-dark;
       }
       
-      // Тут підключаємо жирний шрифт для дат
+      
       .text-date {
         @extend %date-style;
       }
@@ -107,7 +107,7 @@
   }
 }
 
-// === SKILLS SECTION ===
+
 .skills {
   margin-top: 100px;
   margin-bottom: 70px;
@@ -155,7 +155,7 @@
   }
 }
 
-// === REFERENCES SECTION ===
+
 .references {
   .section1 {
     display: flex;
@@ -193,7 +193,7 @@
   }
 }
 
-// === EDUCATION SECTION ===
+
 .education {
   margin-top: 120px;
 
@@ -235,13 +235,13 @@
       text-align: end;
     }
 
-    // ОСЬ ТУТ БУЛО ПРОПУЩЕНО, ТЕПЕР ДОДАНО:
+    
     .text-date {
-        @extend %date-style; // Робить дату жирною
+        @extend %date-style; 
     }
 
     .text-name {
-        // Додав і це про всяк випадок, бо в тебе там теж University Name
+        
         font-weight: 600;
         font-size: 14px;
         color: $primary-dark;
@@ -261,9 +261,8 @@
   }
 }
 
-// === HOBBIES SECTION ===
 .hobbies {
-  margin-top: 60px;
+  margin-top: 100px;
 
   .hobbies-text {
     @include my-title($primary-red);
@@ -317,7 +316,7 @@
       background-color: $primary-dark;
       border-radius: 50px;
       align-items: center;
-      padding-top: $base-unit; // 10px
+      padding-top: $base-unit; 
       margin-right: $base-unit * 3;
 
       span {
@@ -329,4 +328,30 @@
 .item2{
     width: 50px;
     margin-right: 20px;
+}
+
+
+
+.arrow-btn {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 0.8em; 
+  transition: transform 0.3s ease; 
+  color: #333; 
+
+  &.active {
+    transform: rotate(180deg);
+    color: #dc3545;
+  }
+}
+
+.toggle-content {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s; 
+  &.hidden {
+    opacity: 0; 
+    visibility: hidden; 
+  }
 }
